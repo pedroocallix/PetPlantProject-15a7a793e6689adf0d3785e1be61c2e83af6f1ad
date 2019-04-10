@@ -4,30 +4,43 @@ import android.arch.lifecycle.Observer
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import kotlinx.android.synthetic.main.activity_page3.*
 
 class Page3 : AppCompatActivity() {
-    val viewModel = AtualizaViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_page3)
 
-
+        val viewModel = AtualizaViewModel
         val i = intent
         recebeNome.text=i.getStringExtra("nomeJogador")
 
         RetornaDados(viewModel.DadosBluetooth())
         viewModel.DadosBluetooth.observe(this, Observer {
-            RetornaDados(viewModel.DadosBluetooth())
-        })
-    }
-    fun RetornaDados(str:String)
-    {
-        val listaValores=str.split(";")
-        mf_progress_bar_azul.progress=listaValores[0].toInt()
-        mf_progress_bar_amarelo.progress=listaValores[1].toInt()
+           RetornaDados(viewModel.DadosBluetooth())
 
+        })
+
+        dicasButton.setOnClickListener {
+            viewModel.EnviarDados('P')
+        }
+        configButton.setOnClickListener{
+            viewModel.EnviarDados('Z')
+        }
+    }
+    fun RetornaDados(str:String?)
+    {
+        Log.d("mer","recebendo-->"+str)
+          if(str!=null && str.length>0 && str!="null") {
+
+            val listaValores = str.split(";")
+            mf_progress_bar_azul.progress = listaValores[0].toDouble().toInt()
+            mf_progress_bar_amarelo.progress = listaValores[1].toDouble().toInt()
+              Log.d("mer","pa"+mf_progress_bar_amarelo.progress)
+        }
 
     }
 
@@ -44,13 +57,13 @@ class Page3 : AppCompatActivity() {
     }
 
     fun ClickDicas (view: View) {
-        viewModel.EnviarDados('P')
+
         //var intent:Intent=Intent (this, Dicas::class.java)
         //startActivity(intent)
     }
 
     fun ClickConfig (view: View) {
-        viewModel.EnviarDados('Z')
+
        // var intent:Intent=Intent ( this, Configuracoes::class.java)
         //startActivity(intent)
     }
