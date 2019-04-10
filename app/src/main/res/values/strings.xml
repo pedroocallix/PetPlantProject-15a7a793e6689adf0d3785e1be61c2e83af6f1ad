@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">PetPlant</string>
+    <string name="textview">TextView</string>
+    <string name="editar_perfil">Editar perfil</string>
+    <string name="button">Button</string>
+
+    //Inserir Nome da Planta
+    <string name="pergunta_nome">Qual seu Nome?</string>
+    <string name="pergunta_nome_dois">Revele sua identidade secreta.</string>
+    <string name="nome">Nome</string>
+
+    //Botões
+    <string name="ok">OK</string>
+    <string name="conectar">Conectar</string>
+
+    //Planta
+    <string name="jogador">Anônimo</string>
+</resources>
